@@ -5,7 +5,7 @@
 <h1 style="font-family:Segoe UI,Roboto,Arial,sans-serif;color:#222">Hirdetés feladása</h1>
 
 <!-- Debug panel (temporary) -->
-<div style="background:#fff7f0;border:1px solid #ffe6d5;padding:10px;border-radius:8px;margin-bottom:12px">
+@* <div style="background:#fff7f0;border:1px solid #ffe6d5;padding:10px;border-radius:8px;margin-bottom:12px">
     <strong>Auth debug</strong>
     <div style="font-size:13px;color:#333;margin-top:6px">
         Signed in: @(AuthSession.IsSignedIn ? "Yes" : "No")<br />
@@ -14,7 +14,7 @@
         Roles (from JWT): @string.Join(", ", Model.DebugRoles)<br />
         Token present: @(string.IsNullOrEmpty(Model.DebugToken) ? "No" : "Yes")
     </div>
-</div>
+</div> *@
 
 <form method="post" enctype="multipart/form-data" style="max-width:760px;background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 26px rgba(2,6,23,0.06);">
     <div asp-validation-summary="ModelOnly" style="color:#b91c1c;margin-bottom:8px"></div>

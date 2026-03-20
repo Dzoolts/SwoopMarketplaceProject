@@ -176,6 +176,11 @@ namespace SwoopMarketplaceProjectBackendAPI.Controllers
         public async Task<ActionResult<Listing>> PostListing([FromBody] Listing listing)
         {
             ModelState.Remove("User");
+            ModelState.Remove("User.PasswordHash");
+            ModelState.Remove("User.Email");
+            ModelState.Remove("User.Username");
+            ModelState.Remove("User.Phone");
+
 
             var userEmail = User.Claims
                 .FirstOrDefault(c => c.Type == ClaimTypes.Email || c.Type == "email" || c.Type == JwtRegisteredClaimNames.Email)

@@ -153,7 +153,7 @@ namespace SwoopMarketplaceProjectFrontend.Pages.Listings
                     };
                 }
 
-                var created = await _listingApi.CreateWithUserAsync(dto, user);
+                var created = await _listingApi.CreateAsync(dto);
                 if (created == null)
                 {
                     ModelState.AddModelError(string.Empty, "Failed to create listing.");
