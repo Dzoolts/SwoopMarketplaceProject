@@ -1,0 +1,36 @@
+@model SwoopMarketplaceProject.Models.Listing
+@{
+    var imageUrl = Model.ListingImages?.FirstOrDefault(i => i.IsPrimary == true)?.ImageUrl
+                   ?? Model.ListingImages?.FirstOrDefault()?.ImageUrl
+                   ?? "/images/placeholder.png";
+    var avatarUrl = Model.User?.ProfileImageUrl ?? "/images/avatar.png";
+    var when = Model.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd");
+    var condition = (Model.Condition ?? "").ToLowerInvariant();
+}
+<article class="card">
+    <a class="card-link" asp-page="/Listings/Details" asp-route-id="@Model.Id">
+        <div class="card-media">
+            <img src="@imageUrl" alt="@Model.Title" loading="lazy" />
+            <div class="overlay">
+                <span class="badge">@Model.Category?.Name ?? "Other"</span>
+                <span class="price-badge">@Model.Price.ToString("C")</span>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <h3 class="title">@Model.Title</h3>
+            <div class="meta">@Model.Location ?? "Unknown location" • @Model.ListingViews?.FirstOrDefault()?.ViewsCount ?? 0 views</div>
+            <p class="desc">@Model.Description</p>
+
+            <div class="seller" aria-hidden="true">
+                <div class="avatar">
+                    <img src="@avatarUrl" alt="seller" />
+                </div>
+                <div class="seller-info">
+                    <div class="name">@Model.User?.Username ?? "Seller"</div>
+                    <div class="when">@when • @System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(condition)</div>
+                </div>
+            </div>
+        </div>
+    </a>
+</article>

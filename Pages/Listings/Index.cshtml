@@ -1,0 +1,17 @@
+@page
+@model ListingsIndexModel
+<h2>Listings</h2>
+
+<div style="display:flex;gap:12px;align-items:center;justify-content:space-between">
+    <div class="meta">Showing @Model.Listings.Count results</div>
+    <div>
+        <a asp-page="/Listings/Create" class="btn">+ Create listing</a>
+    </div>
+</div>
+
+<div class="listing-grid">
+    @foreach(var l in Model.Listings)
+    {
+        <partial name="/Shared/_ListingCard" model="l" />
+    }
+</div>

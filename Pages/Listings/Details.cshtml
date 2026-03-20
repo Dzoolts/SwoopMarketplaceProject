@@ -1,0 +1,43 @@
+@page "{id:long}"
+@model ListingsDetailsModel
+@if (Model.Listing == null)
+{
+    <div class="form">Listing not found.</div>
+}
+else
+{
+    <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+        <div class="detail-main">
+            <h1>@Model.Listing.Title</h1>
+            <div class="meta">@Model.Listing.Category?.Name ?? "Uncategorized" • @Model.Listing.Location • @Model.Listing.CreatedAt.ToString("yyyy-MM-dd")</div>
+
+            <div class="detail-gallery" style="margin-top:12px">
+                <div style="flex:1">
+                    <img src="@(Model.MainImage ?? "/images/placeholder.png")" style="width:100%;max-height:420px;object-fit:cover;border-radius:12px" />
+                </div>
+                <div class="images-grid" style="width:320px">
+                    @foreach(var img in Model.OtherImages)
+                    {
+                        <img src="@img.ImageUrl" />
+                    }
+                </div>
+            </div>
+
+            <section style="margin-top:18px">
+                <h3>Description</h3>
+                <p>@Model.Listing.Description</p>
+            </section>
+        </div>
+
+        <aside class="detail-side">
+            <div class="card" style="padding:14px">
+                <div class="price" style="font-size:20px">@Model.Listing.Price.ToString("C")</div>
+                <div class="meta">Condition: @Model.Listing.Condition</div>
+                <div class="meta">Seller: @Model.Listing.User?.Username</div>
+                <div style="margin-top:12px">
+                    <a class="btn" asp-page="/Contact" asp-route-userId="@Model.Listing.User?.Id">Contact seller</a>
+                </div>
+            </div>
+        </aside>
+    </div>
+}
